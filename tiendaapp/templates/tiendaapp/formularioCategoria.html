@@ -1,0 +1,26 @@
+{% extends 'tiendaapp/base.html' %}
+{% load static %}
+
+{% block titulo %}
+<h2></h2>
+
+{% endblock titulo %}
+    
+
+
+
+{% block contenido %}
+    <h2>Ingresar Datos sobre Categoria</h2>
+
+    <form  method="post">
+    {% csrf_token %}
+    {{ categoria_form.as_p }}
+    <button type="submit" name="categoria">Guardar</button>
+</form>
+
+
+
+
+{% endblock contenido %}
+    
+

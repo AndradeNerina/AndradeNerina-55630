@@ -1,0 +1,36 @@
+{% extends 'tiendaapp/base.html' %}
+{% load static %}
+
+
+{% block titulo %}
+<h2></h2>
+{% endblock titulo %}
+    
+
+
+{% block contenido %}
+<h4>{{ titulo|capfirst }} {% now 'd / m / Y' %}</h4>
+
+
+<table class="table table-striped">
+     <thead>
+         <tr>
+             <th></th>
+             <th>Nombre del cliente</th>
+             <th>Apellido del cliente</th>
+             <th>Correo del cliente</th>
+         </tr>
+     </thead>
+     <tbody>
+{% for c in clientes %}
+         <tr>
+             <td>{{c.Id}}</td>
+             <td>{{c.nombre}}</td>
+             <td>{{c.apellido}}</td>
+             <td>{{c.correo}}</td>
+         </tr>
+{% endfor %}
+     </tbody>
+
+ </table>
+{% endblock contenido %}

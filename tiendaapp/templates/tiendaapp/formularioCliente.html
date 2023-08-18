@@ -1,0 +1,25 @@
+{% extends 'tiendaapp/base.html' %}
+{% load static %}
+
+{% block titulo %}
+<h2></h2>
+
+{% endblock titulo %}
+    
+
+
+
+{% block contenido %}
+    <h2>Ingresar Datos de Clientes</h2>
+
+    <form  method="post">
+    {% csrf_token %}
+    {{ cliente_form.as_p }}
+    <button type="submit" name="cliente">Guardar</button>
+</form>
+
+
+
+
+{% endblock contenido %}
+    

@@ -1,0 +1,35 @@
+{% extends 'tiendaapp/base.html' %}
+{% load static %}
+
+
+{% block titulo %}
+<h2></h2>
+{% endblock titulo %}
+    
+
+
+{% block contenido %}
+<h4>{{ titulo|capfirst }} {% now 'd / m / Y' %}</h4>
+
+
+<table class="table table-striped">
+     <thead>
+         <tr>
+             <th></th>
+             <th>Nombre del producto</th>
+             <th>Articulo del producto</th>           
+         </tr>
+     </thead>
+     <tbody>
+{% for cat in categoria %}
+         <tr>
+             <td>{{cat.Id}}</td>
+             <td>{{cat.nombre}}</td>
+             <td>{{cat.articulo}}</td>          
+         </tr>
+{% endfor %}
+     </tbody>
+
+ </table>
+
+{% endblock contenido %}

@@ -1,0 +1,20 @@
+{% extends 'tiendaapp/base.html' %}
+{% load static %}
+
+
+{% block titulo %}
+<h2></h2>
+{% endblock titulo %}
+    
+
+
+{% block contenido %}
+    <h2>Ingrese Categoria</h2>
+    <form action="/buscar_categoria2" method="get">
+        {% csrf_token %}   
+        <p>Buscar Categoria: <input type="text" name="buscar" id="buscar"></p>
+        <button type="submit" value="Buscar" class="btn btn-primary">Buscar</button>
+    </form>
+
+{% endblock contenido %}
+
