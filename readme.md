@@ -50,11 +50,11 @@ Agregar nuevos registros de productos, clientes y categorías utilizando un form
 
 ### El menú desplegable "Buscar Datos" cuenta con las siguientes opciones:
 
-"Buscar Clientes": Busca clientes por nombre.
+"Buscar Clientes": Filtra clientes ingresando una letra.
 
-"Buscar Productos": Busca productos por nombre.
+"Buscar Productos": Filtra prodcutos ingresando una letra.
 
-"Buscar Categorías": Busca categorías por nombre.
+"Buscar Categorías": Filtra categoria ingresando una letra.
 
 
 ### El menú desplegable "Ingresar Datos" cuenta con las siguientes opciones:
