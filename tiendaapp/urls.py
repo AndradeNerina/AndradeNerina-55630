@@ -2,14 +2,11 @@
 from django.urls import include, path
 from .views import *
 
+
 urlpatterns = [
    path('', home, name='home'),
    path('categoria/', categoria, name='categoria'),
-   path('productos/', productos, name='productos'),
-   path('clientes/', clientes, name='clientes'),
-   
-   #path('producto_form/', productoForm, name='producto_form'),
-   
+  
    
    path('producto_form/', productoForm, name='producto_form'),
    path('categoria_form/', categoriaForm, name='categoria_form'),
@@ -30,6 +27,20 @@ urlpatterns = [
    path('agregar_cliente/', agregarCliente, name='agregar_cliente'),
    path('agregar_categoria/', agregarCategoria, name='agregar_categoria'),
    
+   #_____________________________________________________
+  
    
+   path('productos/', ProductoList.as_view(), name='productos'),
+   path('create_producto/', ProductoCreate.as_view(), name='create_producto'),
+   path('update_producto/<int:pk>/', ProductoUpdate.as_view(), name='update_producto'),
+   path('delete_producto/<int:pk>/',ProductoDelete.as_view(), name='delete_producto'),
    
+   path('clientes/', ClienteList.as_view(), name='clientes'),
+   path('create_cliente/', ClienteCreate.as_view(), name='create_cliente'),
+   path('update_cliente/<int:pk>/', ClienteUpdate.as_view(), name='update_cliente'),
+   path('delete_cliente/<int:pk>/',ClienteDelete.as_view(), name='delete_cliente'),
+   
+    path('login/', login_request, name='login'),
+    
+    
 ]

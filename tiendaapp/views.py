@@ -1,7 +1,25 @@
+
 from django.http import HttpResponse
 from django.shortcuts import  redirect, render
+from django.urls import reverse_lazy
+
 from .models import Productos , Categoria , Clientes
 from .forms import *
+
+from django.views.generic import ListView
+from django.views.generic import CreateView
+from django.views.generic import UpdateView
+from django.views.generic import DeleteView
+
+from django.contrib.auth.forms import AuthenticationForm 
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
+
+
+
+
+
+#from forms import UserEditForm
 # Create your views here.
 
 
@@ -167,4 +185,69 @@ def agregarCategoria(request):
             
     return render(request,'tiendaapp/formularioCategoria.html', {'categoria_form':categoria_form})
             
+
+
+#_____________________________________________Class Based Views
+#Productos
+
+class ProductoList(ListView):
+    model = Productos
     
+class ProductoCreate(CreateView):
+    model = Productos
+    fields = ['nombre', 'categoria', 'precio']
+    success_url =  reverse_lazy('productos')
+    
+class ProductoUpdate(UpdateView):
+    model = Productos
+    fields = ['nombre', 'categoria', 'precio']
+    success_url =  reverse_lazy('productos')
+    
+class ProductoDelete(DeleteView):
+    model = Productos
+    success_url =  reverse_lazy('productos')
+    
+
+    
+
+    
+#_______________________________________________Clientes______________CBV
+
+class ClienteList(ListView):
+    model = Clientes
+    
+class ClienteCreate(CreateView):
+    model = Clientes
+    fields = ['nombre', 'apellido', 'correo']
+    success_url =  reverse_lazy('clientes')
+    
+class ClienteUpdate(UpdateView):
+    model = Clientes
+    fields = ['nombre', 'apellido', 'correo']
+    success_url =  reverse_lazy('clientes')
+    
+class ClienteDelete(DeleteView):
+    model = Clientes
+    success_url =  reverse_lazy('clientes')
+
+    
+#_________________________________________Login / Logout / Registación __________________________________________________________________
+
+
+def login_request(request):
+    if request.method == "POST":
+        miForm =AuthenticationForm(request, data=request.POST)
+        if miForm.is_valid():
+            usuario = miForm.cleaned_data.get('username')
+            password = miForm.cleaned_data.get('password')
+            user = authenticate(username=usuario, password=password)
+            if user is not None:
+                login(request, user)
+                return render(request, 'tiendaapp/base.html', {'mensaje': f'Bienvenido a nuestro sitio'})  
+            else:
+                return render(request, 'tiendaapp/login.html', {'form': miForm, 'mensaje': f'Los datos son invalidos'})    
+        else:
+            return render(request, 'tiendaapp/login.html', {'form': miForm, 'mensaje': f'Los datos son invalidos'}) 
+    miForm = AuthenticationForm()
+    
+    return render(request, 'tiendaapp/login.html', {'form': miForm})         

@@ -1,3 +1,5 @@
+
+
 {% extends 'tiendaapp/base.html' %}
 {% load static %}
 
@@ -12,10 +14,10 @@
 
 <table>
     <tr>
-        <td width="200"><h2>Clientes</h2></td> 
+        <td width="200"><h2>Productos</h2></td> 
         <td>
             <a 
-            href="{% url 'create_cliente' %}"
+            href="{% url 'create_producto' %}"
             class="btn btn-primary btn-sm"
             ><i class="fa-solid fa-plus" title="New Record"> </i>
             </a>       
@@ -27,32 +29,33 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Nombre del cliente</th>
-            <th>Apellido del cliente</th>
-            <th>Correo del cliente</th>
+            <th>Nombre del producto</th>
+            <th>Categoria del producto</th>
+            <th>Precio del producto</th>
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-{% for c in clientes %}
+
+{% for p in productos_list %}
         <tr>
-            <td>{{c.id}}</td>
-            <td>{{c.nombre}}</td>
-            <td>{{c.apellido}}</td>
-            <td>{{c.correo}}</td>
+            <td>{{p.id}}</td>
+            <td>{{p.nombre}}</td>
+            <td>{{p.categoria}}</td>
+            <td>{{p.precio}}</td>
             <td>
                 <a
-                  href="{% url 'update_cliente' id_cliente=c.id %}"
+                  href="{% url 'update_producto' p.id %}"
                   class="btn btn-primary"
                   style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                   <i class= "fa fa-edit fa-sm" title="Edit Record"></i>
                 </a>
                 <a
-                  href="{% url 'delete_cliente' id_cliente=c.id %}"
+                  href="{% url 'delete_producto' p.id %}"
                   class="btn btn-danger"
                   style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                   <i class="fa-solid fa-trash"></i>
-                </a>
+                </a>             
             </td>
         </tr>
 {% endfor %}

@@ -27,14 +27,15 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Nombre del cliente</th>
-            <th>Apellido del cliente</th>
-            <th>Correo del cliente</th>
+            <th>Nombre del Cliente</th>
+            <th>Apellido del Cliente</th>
+            <th>Correo del Cliente</th>
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-{% for c in clientes %}
+
+{% for c in clientes_list %}
         <tr>
             <td>{{c.id}}</td>
             <td>{{c.nombre}}</td>
@@ -42,13 +43,13 @@
             <td>{{c.correo}}</td>
             <td>
                 <a
-                  href="{% url 'update_cliente' id_cliente=c.id %}"
+                  href="{% url 'update_cliente' c.id %}"
                   class="btn btn-primary"
                   style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                   <i class= "fa fa-edit fa-sm" title="Edit Record"></i>
                 </a>
                 <a
-                  href="{% url 'delete_cliente' id_cliente=c.id %}"
+                  href="{% url 'delete_cliente' c.id %}"
                   class="btn btn-danger"
                   style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                   <i class="fa-solid fa-trash"></i>
