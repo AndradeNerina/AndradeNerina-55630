@@ -1,23 +1,23 @@
 
 from django.http import HttpResponse
-from django.shortcuts import  redirect, render
+from django.shortcuts import  redirect, render, get_list_or_404
 from django.urls import reverse_lazy
 
-from .models import Productos , Categoria , Clientes
+from .models import Productos , Categoria , Clientes, About, Avatar
 from .forms import *
 
 from django.views.generic import ListView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
+from django.views.generic import DetailView
 
 from django.contrib.auth.forms import AuthenticationForm 
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
-
-
-
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 #from forms import UserEditForm
 # Create your views here.
@@ -26,6 +26,7 @@ from django.contrib.auth import login
 def home(request):
     return render(request, 'tiendaapp/home.html')
 
+@login_required
 def categoria(request):
     contexto = {'categoria': Categoria.objects.all(),'titulo': 'Categoria de Productos'}
     return render(request, 'tiendaapp/categoria.html', contexto)
@@ -39,10 +40,15 @@ def clientes(request):
     return render(request, 'tiendaapp/clientes.html', contexto)
 
 
+def about_me(request):
+    contexto = {'about_me': About.objects.all()}
+    return render(request, 'tiendaapp/about.html', contexto)
 
- #__________________________________________________________#
 
- 
+
+ #_________________________________________________________________________________________________________________
+
+@login_required
 def categoriaForm(request):
     if request.method == "POST":
         miForm = CategoriaForm(request.POST)
@@ -58,11 +64,11 @@ def categoriaForm(request):
         
     return render(request, "tiendaapp/categoriaForm.html", {"form": miForm})   
 
-
+@login_required
 def buscarCategoria(request):
     return render(request, "tiendaapp/buscarCategoria.html")
 
-
+@login_required
 def buscarCategoria2(request):
     if request.GET['buscar']:
         patron = request.GET['buscar']
@@ -73,7 +79,7 @@ def buscarCategoria2(request):
 
 #_____________________________________________________________________________________
 
-    
+@login_required   
 def productoForm(request):
     if request.method == "POST":
         miForm = ProductoForm(request.POST)
@@ -92,11 +98,11 @@ def productoForm(request):
     return render(request, "tiendaapp/productoForm.html", {"form": miForm})
 
 
-
+@login_required
 def buscarProducto(request):
     return render(request, "tiendaapp/buscarProducto.html")
 
-
+@login_required
 def buscarProducto2(request):
     if request.GET['buscar']:
         patron = request.GET['buscar']
@@ -106,7 +112,7 @@ def buscarProducto2(request):
     return HttpResponse("No se ingreso nada a buscar")
 
 #_____________________________________________________________________________________
-
+@login_required
 def clienteForm(request):
     if request.method == "POST":
         miForm = ClienteForm(request.POST)
@@ -124,11 +130,11 @@ def clienteForm(request):
         
     return render(request, "tiendaapp/clienteForm.html", {"form": miForm})
 
-
+@login_required
 def buscarCliente(request):
     return render(request, "tiendaapp/buscarCliente.html")
 
-
+@login_required
 def buscarCliente2(request):
     if request.GET['buscar']:
         patron = request.GET['buscar']
@@ -143,7 +149,7 @@ def buscarCliente2(request):
 
 
 
-
+@login_required
 def agregarProducto(request):
     if request.method == 'POST':
         producto_form = ProductoForm(request.POST)
@@ -158,7 +164,7 @@ def agregarProducto(request):
     return render(request,'tiendaapp/formularioProducto.html', {'producto_form':producto_form})
             
     
-    
+@login_required   
 def agregarCliente(request):
     if request.method == 'POST':
         cliente_form = ClienteForm(request.POST)
@@ -171,7 +177,7 @@ def agregarCliente(request):
             
     return render(request,'tiendaapp/formularioCliente.html', {'cliente_form':cliente_form})
             
-    
+@login_required    
 def agregarCategoria(request):
     if request.method == 'POST':
         categoria_form = CategoriaForm(request.POST)
@@ -187,48 +193,72 @@ def agregarCategoria(request):
             
 
 
-#_____________________________________________Class Based Views
-#Productos
+#___________________________________Productos__________Class Based Views
 
-class ProductoList(ListView):
+
+class ProductoList(LoginRequiredMixin, ListView):
     model = Productos
     
-class ProductoCreate(CreateView):
-    model = Productos
-    fields = ['nombre', 'categoria', 'precio']
-    success_url =  reverse_lazy('productos')
-    
-class ProductoUpdate(UpdateView):
+class ProductoCreate(LoginRequiredMixin, CreateView):
     model = Productos
     fields = ['nombre', 'categoria', 'precio']
     success_url =  reverse_lazy('productos')
     
-class ProductoDelete(DeleteView):
+class ProductoUpdate(LoginRequiredMixin, UpdateView):
+    model = Productos
+    fields = ['nombre', 'categoria', 'precio']
+    success_url =  reverse_lazy('productos')
+    
+class ProductoDelete(LoginRequiredMixin, DeleteView):
     model = Productos
     success_url =  reverse_lazy('productos')
     
-
+class ProductoDetail(LoginRequiredMixin, DetailView):
+    model = Productos
+    template_name = 'tiendaapp/productoDetail.html'
     
-
     
-#_______________________________________________Clientes______________CBV
+#___________________________________Clientes______________Class Based Views
 
-class ClienteList(ListView):
+
+class ClienteList(LoginRequiredMixin, ListView):
     model = Clientes
     
-class ClienteCreate(CreateView):
+class ClienteCreate(LoginRequiredMixin, CreateView):
     model = Clientes
     fields = ['nombre', 'apellido', 'correo']
     success_url =  reverse_lazy('clientes')
     
-class ClienteUpdate(UpdateView):
+class ClienteUpdate(LoginRequiredMixin, UpdateView):
     model = Clientes
     fields = ['nombre', 'apellido', 'correo']
     success_url =  reverse_lazy('clientes')
     
-class ClienteDelete(DeleteView):
+class ClienteDelete(LoginRequiredMixin, DeleteView):
     model = Clientes
     success_url =  reverse_lazy('clientes')
+
+class ClienteDetail(LoginRequiredMixin, DetailView):
+    model = Clientes
+    template_name = 'tiendaapp/clienteDetail.html'
+#_________________________________Categoria_____________Class Based Views
+
+class CategoriaList(LoginRequiredMixin, ListView):
+    model = Categoria
+    
+class CategoriaCreate(LoginRequiredMixin, CreateView):
+    model = Categoria
+    fields = ['nombre', 'articulo']
+    success_url =  reverse_lazy('categoria')
+    
+class CategoriaUpdate(LoginRequiredMixin, UpdateView):
+    model = Categoria
+    fields = ['nombre', 'articulo']
+    success_url =  reverse_lazy('categoria')
+    
+class CategoriaDelete(LoginRequiredMixin, DeleteView):
+    model = Categoria
+    success_url =  reverse_lazy('categoria')
 
     
 #_________________________________________Login / Logout / Registación __________________________________________________________________
@@ -243,11 +273,84 @@ def login_request(request):
             user = authenticate(username=usuario, password=password)
             if user is not None:
                 login(request, user)
+                
+                try:
+                    avatar = Avatar.objects.get(user=request.user.id).imagen.url
+                except:
+                    avatar = "/media/avatares/default.png"
+                finally:
+                    request.session["avatar"] = avatar
                 return render(request, 'tiendaapp/base.html', {'mensaje': f'Bienvenido a nuestro sitio'})  
             else:
                 return render(request, 'tiendaapp/login.html', {'form': miForm, 'mensaje': f'Los datos son invalidos'})    
         else:
             return render(request, 'tiendaapp/login.html', {'form': miForm, 'mensaje': f'Los datos son invalidos'}) 
+    
     miForm = AuthenticationForm()
     
-    return render(request, 'tiendaapp/login.html', {'form': miForm})         
+    return render(request, 'tiendaapp/login.html', {'form': miForm})    
+
+
+
+def register(request):
+    if request.method == "POST":
+        miForm = RegistroUsuariosForm(request.POST)
+        if miForm.is_valid():
+            usuario = miForm.cleaned_data.get('username')
+            miForm.save()
+            return render(request, "tiendaapp/base.html")
+    else:
+        miForm =   RegistroUsuariosForm()      
+    return render(request, "tiendaapp/registro.html", {"form":miForm})      
+
+@login_required
+def editarPerfil(request):
+    usuario = request.user
+    if request.method == "POST":
+        form = UserEditForm(request.POST)
+        if form.is_valid():
+            usuario.email = form.cleaned_data.get('email')
+            usuario.password1 = form.cleaned_data.get('password1')
+            usuario.password2 = form.cleaned_data.get('password2')
+            usuario.first_name = form.cleaned_data.get('first_name')
+            usuario.last_name = form.cleaned_data.get('last_name')
+            usuario.save()
+            return render(request, 'tiendaapp/base.html')
+    
+        else:
+            return render(request, 'tiendaapp/editarPerfil.html', {'form': form, 'usuario': usuario.username })
+        
+    else:
+        form = UserEditForm(instance=usuario) 
+    return render(request, 'tiendaapp/editarPerfil.html', {'form': form, 'usuario': usuario.username })
+
+
+@login_required
+def agregarAvatar(request):
+    if request.method == "POST":
+        form = AvatarFormulario(request.POST, request.FILES)
+        if form.is_valid():
+            u = User.objects.get(username=request.user)
+            #______Borrar el avatar viejo
+            avatarViejo = Avatar.objects.filter(user=u)
+            if len(avatarViejo) > 0:
+                for i in range(len(avatarViejo)):
+                    avatarViejo[i].delete()
+            
+            #________Guardar el nuevo           
+            avatar = Avatar(user=u, imagen=form.cleaned_data["imagen"])
+            avatar.save()
+            
+            #____Hago que la url de la imagen viaje en el request
+            imagen = Avatar.objects.get(user=request.user.id).imagen.url
+            request.session['avatar'] = imagen
+            return render(request,'tiendaapp/base.html')
+        
+    else:
+        form = AvatarFormulario()
+    return render(request, 'tiendaapp/agregarAvatar.html', {'form': form})
+
+
+
+    
+    

@@ -9,29 +9,33 @@
 
 
 {% block contenido %}
-   <h4>{{ titulo|capfirst }} {% now 'd / m / Y' %}</h4>
+<table class="table table-dark table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre del producto</th>
+            <th>Categoria del producto</th>
+            <th>Precio del producto </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for p in productos %}
+        <tr>
+            <td>{{p.id}}</td>
+            <td>{{p.nombre}}</td>
+            <td>{{p.categoria}}</td>
+            <td>{{p.precio}}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+        
+</table>
 
-   <table class="table table-striped">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Nombre del producto</th>
-                <th>Categoria del producto</th>
-                <th>Precio del producto</th>
-            </tr>
-        </thead>
-        <tbody>
-   {% for p in productos %}
-            <tr>
-                <td>{{p.Id}}</td>
-                <td>{{p.nombre}}</td>
-                <td>{{p.categoria}}</td>
-                <td>{{p.precio}}</td>
-            </tr>
-   {% endfor %}
-        </tbody>
-
-    </table>
-
+               
 {% endblock contenido %}
+
+
+
+
 

@@ -1,0 +1,22 @@
+{% extends 'tiendaapp/base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+     <h3>{{ object.nombre}}, {{object.apellido }}</h3>
+     
+     
+  
+  <img src="{{ object.imagen.url }}" alt="{{ object.nombre }}">
+
+
+</form>
+    
+
+  <!-- Puedes agregar más detalles del producto aquí -->
+{% endblock contenido %}

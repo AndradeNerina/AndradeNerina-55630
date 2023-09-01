@@ -8,17 +8,16 @@
     
 
 
-{% block contenido %} 
+{% block contenido %}
 
 <table class="table table-dark table-striped">
     <tr>
-        <td width="200"><h2>Clientes</h2></td> 
+        <td width="200"><h2>Categoria</h2></td> 
         <td>
             <a 
-            href="{% url 'create_cliente' %}"
+            href="{% url 'create_categoria' %}"
             class="btn btn-primary btn-sm"
             ><i class="fa-solid fa-plus" title="New Record"> </i>
-            </a>       
         </td>
     </tr>
 </table>
@@ -27,35 +26,27 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Nombre del Cliente</th>
-            <th>Apellido del Cliente</th>
-            <th>Correo del Cliente</th>
+            <th>Nombre</th>
+            <th>Articulo</th>
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
 
-{% for c in clientes_list %}
+{% for cat in categoria_list %}
         <tr>
             <td>{{c.id}}</td>
             <td>{{c.nombre}}</td>
-            <td>{{c.apellido}}</td>
-            <td>{{c.correo}}</td>
+            <td>{{c.articulo}}</td>
             <td>
                 <a
-                  href="{% url 'update_cliente' c.id %}"
+                  href="{% url 'update_categoria' cat.id %}"
                   class="btn btn-primary"
                   style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                   <i class= "fa fa-edit fa-sm" title="Edit Record"></i>
                 </a>
                 <a
-                  href="{% url 'detail_cliente' c.id %}"
-                  class="btn btn-primary"
-                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                  <i class= "fa solid fa-circle-info" title="Detail"></i>
-                </a>
-                <a
-                  href="{% url 'delete_cliente' c.id %}"
+                  href="{% url 'delete_categoria' cat.id %}"
                   class="btn btn-danger"
                   style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                   <i class="fa-solid fa-trash"></i>

@@ -9,7 +9,7 @@
 
 
 {% block contenido %}
-    <h2>Ingrese el nombre del producto que desea buscar</h2>
+    <p class="lead"> Ingrese el nombre del producto que desea buscar </p>
     <form action="/buscar_producto2" method="get">
         {% csrf_token %}   
         <p>Buscar un Producto: <input type="text" name="buscar" id="buscar"></p>

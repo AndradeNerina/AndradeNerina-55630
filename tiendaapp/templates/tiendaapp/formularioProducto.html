@@ -11,8 +11,7 @@
 
 
 {% block contenido %}
-    <h2>Ingresar Datos sobre Productos</h2>
-
+    <p class="lead"> Ingresar Datos sobre el producto</p>
     <form method="post">
         {% csrf_token %}
         {{ producto_form.as_p }}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 #from django.contrib.auth import User 
 
 # Create your models here.
@@ -37,12 +38,21 @@ class Clientes(models.Model):
     def __str__(self):
         return f"{self.nombre}, {self.apellido}, {self.correo}"
     
-    #______________________________________________________
     
-    #Imagenes
-    #class Avatar(models.Model):
-        imagen = models.ImageField(upload_to="avatares")
-        user = models.ForeignKey(User)
+class About(models.Model):
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+    acerca_de_mi = models.CharField(max_length=1000)
+    
+    def __str__(self):
+        return f"{self.nombre}, {self.apellido}, {self.acerca_de_mi}"
+    
+    
+#_______________________________________________________________________________________
+    
+class Avatar(models.Model):
+    imagen = models.ImageField(upload_to="avatares")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
         
-        def __str__(self):
-            return f"{self.user} {self.imagen}"
+    def __str__(self):
+        return f"{self.user} {self.imagen}"

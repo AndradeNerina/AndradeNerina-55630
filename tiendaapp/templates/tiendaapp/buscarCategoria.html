@@ -9,7 +9,7 @@
 
 
 {% block contenido %}
-    <h2>Ingrese Categoria</h2>
+    <p class="lead"> Ingrese el nombre de la categoría que desea buscar </p>
     <form action="/buscar_categoria2" method="get">
         {% csrf_token %}   
         <p>Buscar Categoria: <input type="text" name="buscar" id="buscar"></p>

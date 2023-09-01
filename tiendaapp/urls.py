@@ -2,10 +2,12 @@
 from django.urls import include, path
 from .views import *
 
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
    path('', home, name='home'),
-   path('categoria/', categoria, name='categoria'),
+   path('about/', about_me, name='about'),
+   
   
    
    path('producto_form/', productoForm, name='producto_form'),
@@ -34,13 +36,26 @@ urlpatterns = [
    path('create_producto/', ProductoCreate.as_view(), name='create_producto'),
    path('update_producto/<int:pk>/', ProductoUpdate.as_view(), name='update_producto'),
    path('delete_producto/<int:pk>/',ProductoDelete.as_view(), name='delete_producto'),
+   path('detail_producto/<int:pk>/',ProductoDetail.as_view(), name='detail_producto'),
    
    path('clientes/', ClienteList.as_view(), name='clientes'),
    path('create_cliente/', ClienteCreate.as_view(), name='create_cliente'),
    path('update_cliente/<int:pk>/', ClienteUpdate.as_view(), name='update_cliente'),
    path('delete_cliente/<int:pk>/',ClienteDelete.as_view(), name='delete_cliente'),
+   path('detail_cliente/<int:pk>/',ClienteDetail.as_view(), name='detail_cliente'),
    
-    path('login/', login_request, name='login'),
-    
+   path('categoria/', CategoriaList.as_view(), name='categoria'),
+   path('create_categoria/', CategoriaCreate.as_view(), name='create_categoria'),
+   path('update_categoria/<int:pk>/', CategoriaUpdate.as_view(), name='update_categoria'),
+   path('delete_categoria/<int:pk>/',CategoriaDelete.as_view(), name='delete_categoria'),
+   
+   
+   path('login/', login_request, name='login'),
+   path('logout/', LogoutView.as_view(template_name="tiendaapp/logout.html"), name='logout'),
+   path('registro/', register, name='registro'),
+   path('editar_perfil/', editarPerfil, name='editar_perfil'),
+   path('agregar_avatar/', agregarAvatar, name='agregar_avatar'),
+   
+   
     
 ]
