@@ -34,13 +34,19 @@ Variables:Nombre, Artículo.
 ### Funcionalidades:
 
 La aplicación Tienda de Ropa ofrece las siguientes funcionalidades:
-Ver información detallada de productos, clientes y categorías almacenados en la base de datos.
-Buscar clientes registrados, productos en stock, y buscar categorías.
+Para ver el contenido de la página habrá que registrarse y luego iniciar sesión, esto lleva a un menú de opciones donde se podrá ver lo siguiente:
+Información detallada de productos, clientes y categorías almacenados en la base de datos, con posibilidad de modificarlos.
+Buscar clientes registrados, productos en stock, y categorías.
 Agregar nuevos registros de productos, clientes y categorías utilizando un formulario.
 
-### Istrucciones de Uso:
 
-### Utiliza el menú de opciones para acceder a diferentes secciones:
+### Istrucciones de Uso: 
+
+El primer paso es registrarse utilizando el botón "Registrarse"  y luego iniciar sesión con el botón "Acceder" para navegar por el sitio. Luego tendrás acceso al Home, About me(información sobre mi), Menú, Search y un boton "Agregar".
+Existe la posibilidad de editar tu perfil.
+Cuando quieras cerrar la sesión deberas dar click al boton "Logout"
+
+### Utiliza el menú desplegable "Menú" para acceder a diferentes secciones:
 
 "Productos": Visualiza la información detallada de los productos en stock.
 
@@ -48,13 +54,13 @@ Agregar nuevos registros de productos, clientes y categorías utilizando un form
 
 "Categorías": Visualiza la información de las categorías disponibles.
 
-### El menú desplegable "Buscar Datos" cuenta con las siguientes opciones:
+### El menú desplegable "Search" cuenta con las siguientes opciones:
 
-"Buscar Clientes": Filtra clientes ingresando una letra.
+"Buscar Clientes": Filtra clientes ingresando el nombre.
 
-"Buscar Productos": Filtra prodcutos ingresando una letra.
+"Buscar Productos": Filtra prodcutos ingresando el nombre.
 
-"Buscar Categorías": Filtra categoria ingresando una letra.
+"Buscar Categorías": Filtra categoria ingresando el nombre.
 
 
 ### El menú desplegable "Ingresar Datos" cuenta con las siguientes opciones:
@@ -67,4 +73,4 @@ Agregar nuevos registros de productos, clientes y categorías utilizando un form
 
 
 
-"Agregar Datos": Accede al formulario para agregar nuevos registros.Completa el formulario con los datos correspondientes y haz clic en "Guardar" para agregar un nuevo registro.
+"Ingresar Datos": Accede al formulario para agregar nuevos registros.Completa el formulario con los datos correspondientes y haz clic en "Guardar" para agregar un nuevo registro.

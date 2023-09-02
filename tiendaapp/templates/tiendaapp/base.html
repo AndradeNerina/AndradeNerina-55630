@@ -50,7 +50,7 @@
                           <a class="nav-link" style="color:white"  href="{% url 'home' %}">Home</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" style="color:white" href="{% url 'about' %}">About me <i class="fa-regular fa-face-smile"></i></a>
+                          <a class="nav-link" style="color:white" href="{% url 'about' %}">About</i></a>
                         </li>
                         <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle" style="color:white"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -80,7 +80,7 @@
                         </li>
                         <li class="nav-item dropdown">
                           <a class="nav-link dropdown-toggle" style="color:white"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Agregar
+                            Ingresar Datos
                           </a>
                           <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="{% url 'agregar_producto' %}">Productos</a></li>
@@ -92,6 +92,7 @@
                           </ul>
                           <li>
                             <a class="btn btn-success" href="{% url 'editar_perfil' %}">Editar Perfil</a>
+                            <a class="btn btn-success" href="{% url 'agregar_avatar' %}">Agregar Avatar</a>
                             <a class="btn btn-success" href="{% url 'logout' %}">Logout</a>
                           </li>
                         </li>
@@ -104,6 +105,7 @@
       {% else %}    
           <a class="btn btn-success" href="{% url 'registro' %}">Registrarse</a>
           <a class="btn btn-success" href="{% url 'login' %}">Acceder <i class="fa-regular fa-user"></i></a>
+          
       {% endif %}
                                                   
           </div>

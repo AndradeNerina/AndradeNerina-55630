@@ -280,6 +280,7 @@ def login_request(request):
                     avatar = "/media/avatares/default.png"
                 finally:
                     request.session["avatar"] = avatar
+                    
                 return render(request, 'tiendaapp/base.html', {'mensaje': f'Bienvenido a nuestro sitio'})  
             else:
                 return render(request, 'tiendaapp/login.html', {'form': miForm, 'mensaje': f'Los datos son invalidos'})    
